@@ -7,6 +7,7 @@
 
     let
       system = "x86_64-linux";
+      pkgs = import nixpkgs { inherit system; };
       overlay = final: prev: {
         dwm = prev.dwm.overrideAttrs (old: {
           version = "6.5";
@@ -23,6 +24,8 @@
       }).dwm;
     in {
       overlays.default = overlay;
+      devShells.default =
+        pkgs.mkShell { buildInputs = with pkgs; [ bear clangd gcc ]; };
       packages.${system}.default = dwm;
     };
 }
