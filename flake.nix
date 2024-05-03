@@ -4,28 +4,18 @@
   inputs = { nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; };
 
   outputs = { self, nixpkgs }:
-
     let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
-      overlay = final: prev: {
-        dwm = prev.dwm.overrideAttrs (old: {
-          version = "6.5";
-          src = builtins.path {
-            path = ./.;
-            name = "dwm";
-          };
-        });
-      };
+      inherit (nixpkgs) lib;
+      withSystem = f:
+        lib.fold lib.recursiveUpdate { } (map f [
+          "x86_64-linux"
+          "x86_64-darwin"
+          "aarch64-linux"
+          "aarch64-darwin"
+        ]);
 
-      dwm = (import nixpkgs {
-        inherit system;
-        overlays = [ overlay ];
-      }).dwm;
-    in {
-      overlays.default = overlay;
-      devShells.default =
-        pkgs.mkShell { buildInputs = with pkgs; [ bear clangd gcc ]; };
-      packages.${system}.default = dwm;
-    };
+      mkPackages = pkgs: { dwm = pkgs.callPackage ./dwm.nix { }; };
+    in withSystem (system: {
+      packages.${system} = mkPackages nixpkgs.legacyPackages.${system};
+    });
 }
