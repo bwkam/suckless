@@ -7,8 +7,8 @@ stdenv.mkDerivation {
   src = ./dwmblocks;
 
   strictDeps = true;
-  buildInputs = builtins.attrValues { inherit (xorg) libxcb xcbutil; }
-    ++ [ meson ninja pkg-config ];
+  nativeBuildInputs = [ meson ninja pkg-config ];
+  buildInputs = builtins.attrValues { inherit (xorg) libxcb xcbutil; };
 
   installFlags = [ "PREFIX=$(out)" ];
 
