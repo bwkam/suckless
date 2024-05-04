@@ -10,7 +10,7 @@ stdenv.mkDerivation {
 
   buildInputs = builtins.attrValues { inherit (xorg) libxcb xcbutil; };
 
-  installFlags = [ "PREFIX=$(out)" ];
+  installFlags = [ "INSTALL_DIR=$(out)" ];
 
   meta.mainProgram = "dwmblocks";
 }
