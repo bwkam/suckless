@@ -18,7 +18,23 @@
         dwm = pkgs.callPackage ./dwm.nix { };
         dwmblocks = pkgs.callPackage ./dwmblocks.nix { };
       };
+
+      mkShells = pkgs: {
+        default = pkgs.mkShell {
+          buildInputs =
+            builtins.attrValues { inherit (pkgs.xorg) libxcb xcbutil; };
+        };
+
+        shellInit = ''
+          export LD_LIBRARY_PATH=${
+            lib.makeLibraryPath builtins.attrValues {
+              inherit (pkgs.xorg) libxcb xcbutil;
+            }
+          }
+        '';
+      };
     in withSystem (system: {
       packages.${system} = mkPackages nixpkgs.legacyPackages.${system};
+      devShells.${system} = mkShells nixpkgs.legacyPackages.${system};
     });
 }

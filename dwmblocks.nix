@@ -8,11 +8,9 @@ stdenv.mkDerivation {
 
   strictDeps = true;
 
-  buildInputs = [ libX11 pkg-config ] ++ builtins.attrValues {
-    inherit (xorg)
-      libxcb xcbutil xlsatoms xcbutilwm xcbutilrenderutil xcbutilkeysyms
-      xcbproto;
-  };
+  nativeBuildInputs = [ pkg-config ];
+  buildInputs = [ libX11 ]
+    ++ builtins.attrValues { inherit (xorg) libxcb xcbutil xlsatoms xcbproto; };
 
   makeFlags = [ "PREFIX=$(out)" ];
 
