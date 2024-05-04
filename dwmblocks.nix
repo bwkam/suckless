@@ -1,4 +1,4 @@
-{ stdenv, xorg }:
+{ stdenv, xorg, libX11, pkg-config }:
 
 stdenv.mkDerivation {
   pname = "dwmblocks";
@@ -8,9 +8,13 @@ stdenv.mkDerivation {
 
   strictDeps = true;
 
-  buildInputs = builtins.attrValues { inherit (xorg) libxcb xcbutil; };
+  buildInputs = [ libX11 pkg-config ] ++ builtins.attrValues {
+    inherit (xorg)
+      libxcb xcbutil xlsatoms xcbutilwm xcbutilrenderutil xcbutilkeysyms
+      xcbproto;
+  };
 
-  installFlags = [ "INSTALL_DIR=$(out)" ];
+  makeFlags = [ "PREFIX=$(out)" ];
 
   meta.mainProgram = "dwmblocks";
 }
