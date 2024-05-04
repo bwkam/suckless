@@ -1,5 +1,5 @@
 {
-  description = "my dwm config";
+  description = "my suckless flake";
 
   inputs = { nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; };
 
