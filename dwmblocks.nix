@@ -1,4 +1,4 @@
-{ stdenv, meson, ninja, pkg-config, xorg }:
+{ stdenv, xorg }:
 
 stdenv.mkDerivation {
   pname = "dwmblocks";
@@ -7,7 +7,7 @@ stdenv.mkDerivation {
   src = ./dwmblocks;
 
   strictDeps = true;
-  nativeBuildInputs = [ meson ninja pkg-config ];
+
   buildInputs = builtins.attrValues { inherit (xorg) libxcb xcbutil; };
 
   installFlags = [ "PREFIX=$(out)" ];
