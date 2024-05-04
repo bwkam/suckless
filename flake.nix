@@ -14,7 +14,10 @@
           "aarch64-darwin"
         ]);
 
-      mkPackages = pkgs: { dwm = pkgs.callPackage ./dwm.nix { }; };
+      mkPackages = pkgs: {
+        dwm = pkgs.callPackage ./dwm.nix { };
+        dwmblocks = pkgs.callPackage ./dwmblocks.nix { };
+      };
     in withSystem (system: {
       packages.${system} = mkPackages nixpkgs.legacyPackages.${system};
     });
