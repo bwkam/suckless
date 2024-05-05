@@ -36,9 +36,8 @@ all: $(BUILD_DIR)/$(BIN)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c config.h
 	$Qmkdir -p $(@D)
-	$(PRINTF) "CC" $@
-	$Q$(COMPILE.c) -o $@ $<
-
+	$(PRINTF) "CC" $@ $ -DSCRIPTS_DIR=̈$(SCRIPTS_DIR)
+	$Q$(COMPILE.c) -o $@ $< -DSCRIPTS_DIR=̈$(SCRIPTS_DIR)̈ 
 $(BUILD_DIR)/$(BIN): $(OBJS)
 	$(PRINTF) "LD" $@
 	$Q$(LINK.o) $^ $(LDLIBS) -o $@
