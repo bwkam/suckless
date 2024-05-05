@@ -1,1 +1,2 @@
-date +"%a, %d %b %+4Y %T"
+# date +"%a, %d %b %+4Y %T"
+echo "  hi"
