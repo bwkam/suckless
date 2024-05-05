@@ -12,6 +12,7 @@ LIBS := xcb-atom
 PREFIX := /usr/local
 SCRIPTS_DIR := $(PREFIX)/scripts
 CFLAGS := -Ofast -I. -I$(INC_DIR) -std=c99
+CFLAGS += -DSCRIPTS_DIR=$(SCRIPTS_DIR) 
 CFLAGS += -DBINARY=\"$(BIN)\" -D_POSIX_C_SOURCE=200809L
 CFLAGS += -Wall -Wpedantic -Wextra -Wswitch-enum
 CFLAGS += $(shell pkg-config --cflags $(LIBS))
@@ -36,8 +37,8 @@ all: $(BUILD_DIR)/$(BIN)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c config.h
 	$Qmkdir -p $(@D)
-	$(PRINTF) "CC" $@ $ -DSCRIPTS_DIR=$(SCRIPTS_DIR)
-	$Q$(COMPILE.c) -o $@ $< -DSCRIPTS_DIR=$(SCRIPTS_DIR)
+	$(PRINTF) "CC" $@ 
+	$Q$(COMPILE.c) -o $@ $< -save-temps
 $(BUILD_DIR)/$(BIN): $(OBJS)
 	$(PRINTF) "LD" $@
 	$Q$(LINK.o) $^ $(LDLIBS) -o $@

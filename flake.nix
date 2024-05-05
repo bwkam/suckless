@@ -21,6 +21,7 @@
 
       mkShells = pkgs: {
         default = pkgs.mkShell {
+          nativeBuildInputs = [ pkgs.pkg-config ];
           buildInputs =
             builtins.attrValues { inherit (pkgs.xorg) libxcb xcbutil; };
         };
