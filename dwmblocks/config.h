@@ -16,11 +16,10 @@
 // Control whether a trailing delimiter should be appended to the status.
 #define TRAILING_DELIMITER 0
 
-#define TOSTR(n) #n 
 
 // Define blocks for the status feed as X(icon, cmd, interval, signal).
 #define BLOCKS(X)             \
-       X("", TOSTR(SCRIPTS_DIR)"/date", 1, 10)  \
+       X("", "SCRIPTS_DIR/date", 1, 10)  \
     // X("", "sb-music", 0, 2)   \
     // X("", "sb-disk", 1800, 3) \
     // X("", "sb-memory", 10, 4) \

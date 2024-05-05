@@ -14,6 +14,12 @@ in stdenv.mkDerivation {
   buildInputs = [ libX11 ]
     ++ builtins.attrValues { inherit (xorg) libxcb xcbutil xlsatoms xcbproto; };
 
+  patchPhase = ''
+    ls
+      substituteInPlace config.h --replace-fail "SCRIPTS_DIR" "$out/scripts"
+      cat ./config.h
+  '';
+
   postInstall = ''
     patchShebangs --host $out/scripts
     wrapProgram $out/scripts/date --prefix PATH ":" \
