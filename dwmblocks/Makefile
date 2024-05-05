@@ -10,6 +10,7 @@ VERBOSE := 0
 LIBS := xcb-atom
 
 PREFIX := /usr/local
+SCRIPTS_DIR := $(PREFIX)/scripts
 CFLAGS := -Ofast -I. -I$(INC_DIR) -std=c99
 CFLAGS += -DBINARY=\"$(BIN)\" -D_POSIX_C_SOURCE=200809L
 CFLAGS += -Wall -Wpedantic -Wextra -Wswitch-enum
@@ -49,9 +50,13 @@ clean:
 install: $(BUILD_DIR)/$(BIN)
 	$(PRINTF) "INSTALL" $(INSTALL_DIR)/$(BIN)
 	$Qinstall -D -m 755 $< $(INSTALL_DIR)/$(BIN)
+	$(PRINTF) "INSTALL" $(SCRIPTS_DIR)
+	$Qcp -R scripts $(SCRIPTS_DIR)
 
 uninstall:
 	$(PRINTF) "RM" $(INSTALL_DIR)/$(BIN)
 	$Q$(RM) $(INSTALL_DIR)/$(BIN)
+	$(PRINTF) "RM" $(SCRIPTS_DIR)
+	$Q$(RM) -r $(SCRIPTS_DIR)
 
 .PHONY: all clean install uninstall
