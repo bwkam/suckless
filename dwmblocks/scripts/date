@@ -1,0 +1,3 @@
+# date +"%a, %d %b %+4Y %T"
+# echo "  hi"
+echo "sup"

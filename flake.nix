@@ -1,5 +1,5 @@
 {
-  description = "my dwm config";
+  description = "my suckless flake";
 
   inputs = { nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; };
 
@@ -14,8 +14,28 @@
           "aarch64-darwin"
         ]);
 
-      mkPackages = pkgs: { dwm = pkgs.callPackage ./dwm.nix { }; };
+      mkPackages = pkgs: {
+        dwm = pkgs.callPackage ./dwm.nix { };
+        dwmblocks = pkgs.callPackage ./dwmblocks.nix { };
+      };
+
+      mkShells = pkgs: {
+        default = pkgs.mkShell {
+          nativeBuildInputs = [ pkgs.pkg-config ];
+          buildInputs =
+            builtins.attrValues { inherit (pkgs.xorg) libxcb xcbutil; };
+        };
+
+        shellInit = ''
+          export LD_LIBRARY_PATH=${
+            lib.makeLibraryPath builtins.attrValues {
+              inherit (pkgs.xorg) libxcb xcbutil;
+            }
+          }
+        '';
+      };
     in withSystem (system: {
       packages.${system} = mkPackages nixpkgs.legacyPackages.${system};
+      devShells.${system} = mkShells nixpkgs.legacyPackages.${system};
     });
 }
