@@ -1,1 +1,1 @@
-date +"  %a, %d %b %Y %r" | cut -d ":" -f1,2
+date +"  %a, %d %b %r" | cut -d ":" -f1,2
