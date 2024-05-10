@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 icons_discharging=(󱃍 󰁺 󰁻 󰁼 󰁽 󰁾 󰁿 󰂀 󰂁 󰂂 󰁹)
 icons_charging=(󰢟 󰢜 󰂆 󰂇 󰂈 󰢝 󰂉 󰢞 󰂊 󰂋 󰂅)
