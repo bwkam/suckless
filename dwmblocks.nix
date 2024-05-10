@@ -46,6 +46,8 @@ stdenv.mkDerivation {
       "${makeBinPath [ coreutils ]}"
     wrapProgram $out/scripts/bat --prefix PATH ":" \
       "${makeBinPath [ coreutils ]}"
+    wrapProgram $out/scripts/net --prefix PATH ":" \
+      "${makeBinPath [ coreutils ]}"
   '';
 
   makeFlags = [ "PREFIX=$(out)" ];
