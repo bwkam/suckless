@@ -19,4 +19,4 @@ do
 	fi
 done
 
-printf "%s %s%%" "$icon" "$level"
+echo "$icon" "$level"
