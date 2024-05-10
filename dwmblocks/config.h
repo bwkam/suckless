@@ -21,6 +21,7 @@
 #define BLOCKS(X)             \
        X("", "SCRIPTS_DIR/date", 1, 0)  \
        X("", "SCRIPTS_DIR/bat", 1, 0)   \
+       X("", "SCRIPTS_DIR/net", 1, 0)   \
     // X("", "sb-disk", 1800, 3) \
     // X("", "sb-memory", 10, 4) \
     // X("", "sb-loadavg", 5, 5) \

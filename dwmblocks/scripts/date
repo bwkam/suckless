@@ -1,2 +1,2 @@
 #!/bin/sh
-date +"^c#FF0000^  %a, %d %b %r" | cut -d ":" -f1,2
+date +"  %a, %d %b %r" | cut -d ":" -f1,2
