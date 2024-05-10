@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+icons_discharging=(󱃍 󰁺 󰁻 󰁼 󰁽 󰁾 󰁿 󰂀 󰂁 󰂂 󰁹)
+icons_charging=(󰢟 󰢜 󰂆 󰂇 󰂈 󰢝 󰂉 󰢞 󰂊 󰂋 󰂅)
+level="$(cat /sys/class/power_supply/BAT1/capacity)"
+status="$(cat /sys/class/power_supply/BAT1/status)"
+
+for percent in $(seq 100 -10 0)
+do
+	if [ "$level" -ge "$percent" ]
+	then
+		case "$status" in
+			Charging)
+				icon=${icons_charging[$((percent / 10))]};;
+			*)
+				icon=${icons_discharging[$((percent / 10))]}
+		esac
+		break
+	fi
+done
+
+printf "%s %s%%" "$icon" "$level"
