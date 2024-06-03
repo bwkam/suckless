@@ -1,3 +1,2 @@
-# date +"%a, %d %b %+4Y %T"
-# echo "  hi"
-echo "sup"
+#!/bin/sh
+date +"  %a, %d %b %r" | cut -d ":" -f1,2

@@ -1,8 +1,17 @@
-{ stdenv, xorg, libX11, pkg-config, makeWrapper, lib, coreutils }:
+{
+  stdenv,
+  xorg,
+  libX11,
+  pkg-config,
+  makeWrapper,
+  lib,
+  coreutils,
+}:
 
-let inherit (lib) makeBinPath;
-
-in stdenv.mkDerivation {
+let
+  inherit (lib) makeBinPath;
+in
+stdenv.mkDerivation {
   pname = "dwmblocks";
   version = "4.20.24";
 
@@ -10,9 +19,20 @@ in stdenv.mkDerivation {
 
   strictDeps = true;
 
-  nativeBuildInputs = [ pkg-config makeWrapper ];
-  buildInputs = [ libX11 ]
-    ++ builtins.attrValues { inherit (xorg) libxcb xcbutil xlsatoms xcbproto; };
+  nativeBuildInputs = [
+    pkg-config
+    makeWrapper
+  ];
+  buildInputs =
+    [ libX11 ]
+    ++ builtins.attrValues {
+      inherit (xorg)
+        libxcb
+        xcbutil
+        xlsatoms
+        xcbproto
+        ;
+    };
 
   patchPhase = ''
     ls
@@ -23,6 +43,10 @@ in stdenv.mkDerivation {
   postInstall = ''
     patchShebangs --host $out/scripts
     wrapProgram $out/scripts/date --prefix PATH ":" \
+      "${makeBinPath [ coreutils ]}"
+    wrapProgram $out/scripts/bat --prefix PATH ":" \
+      "${makeBinPath [ coreutils ]}"
+    wrapProgram $out/scripts/net --prefix PATH ":" \
       "${makeBinPath [ coreutils ]}"
   '';
 
