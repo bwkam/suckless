@@ -2,7 +2,7 @@
 #define CONFIG_H
 
 // String used to delimit block outputs in the status.
-#define DELIMITER "  "
+#define DELIMITER " / "
 
 // Maximum number of Unicode characters that a block can output.
 #define MAX_BLOCK_OUTPUT_LENGTH 45
@@ -16,12 +16,11 @@
 // Control whether a trailing delimiter should be appended to the status.
 #define TRAILING_DELIMITER 0
 
-
 // Define blocks for the status feed as X(icon, cmd, interval, signal).
-#define BLOCKS(X)             \
-       X("", "SCRIPTS_DIR/net", 1, 0)   \
-       X("", "SCRIPTS_DIR/date", 1, 0)  \
-       X("", "SCRIPTS_DIR/bat", 1, 0)   \
+#define BLOCKS(X)                   \
+    X("", "SCRIPTS_DIR/bat", 1, 0)  \
+    X("", "SCRIPTS_DIR/net", 1, 0)  \
+    X("", "SCRIPTS_DIR/date", 1, 0) \
     // X("", "sb-disk", 1800, 3) \
     // X("", "sb-memory", 10, 4) \
     // X("", "sb-loadavg", 5, 5) \
