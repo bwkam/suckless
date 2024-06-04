@@ -1,4 +1,9 @@
-{ stdenv, libX11, libXinerama, libXft }:
+{
+  stdenv,
+  libX11,
+  libXinerama,
+  libXft,
+}:
 stdenv.mkDerivation {
   pname = "dwm";
   version = "6.5";
@@ -7,9 +12,9 @@ stdenv.mkDerivation {
 
   strictDeps = true;
 
-  buildInputs = [ libX11 libXinerama libXft ];
+  buildInputs = [libX11 libXinerama libXft];
 
-  installFlags = [ "PREFIX=$(out)" ];
+  installFlags = ["PREFIX=$(out)"];
 
   meta.mainProgram = "dwm";
 }

@@ -17,8 +17,8 @@
       "-DXINERAMA",
       "drw.c"
     ],
-    "directory": "/home/bwkam/dwm",
-    "file": "/home/bwkam/dwm/drw.c"
+    "directory": "/home/bwkam/suckless/dwm",
+    "file": "/home/bwkam/suckless/dwm/drw.c"
   },
   {
     "arguments": [
@@ -38,8 +38,8 @@
       "-DXINERAMA",
       "dwm.c"
     ],
-    "directory": "/home/bwkam/dwm",
-    "file": "/home/bwkam/dwm/dwm.c"
+    "directory": "/home/bwkam/suckless/dwm",
+    "file": "/home/bwkam/suckless/dwm/dwm.c"
   },
   {
     "arguments": [
@@ -59,7 +59,7 @@
       "-DXINERAMA",
       "util.c"
     ],
-    "directory": "/home/bwkam/dwm",
-    "file": "/home/bwkam/dwm/util.c"
+    "directory": "/home/bwkam/suckless/dwm",
+    "file": "/home/bwkam/suckless/dwm/util.c"
   }
 ]
