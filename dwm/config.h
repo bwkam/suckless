@@ -16,6 +16,7 @@ static const int showsystray = 1; /* 0 means no systray */
 
 static const int showbar = 1; /* 0 means no bar */
 static const int topbar = 1;  /* 0 means bottom bar */
+static const int focusonwheel = 0;
 
 static const double activeopacity =
     0.8f; /* Window opacity when it's focused (0 <= opacity <= 1) */
