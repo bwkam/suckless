@@ -23,7 +23,7 @@ static const double activeopacity =
 static const double inactiveopacity =
     0.7f; /* Window opacity when it's inactive (0 <= opacity <= 1) */
 
-static const char *fonts[] = {"Iosevka Nerd Font:size=10:style=Regular",
+static const char *fonts[] = {"FiraCode Nerd Font:size=10:style=Light",
                               "Material Design Icons Desktop:size=11"};
 static const char dmenufont[] = "monospace:size=10";
 static const char col_gray1[] = "#222222";
