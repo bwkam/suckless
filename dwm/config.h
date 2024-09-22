@@ -78,6 +78,15 @@ static const Layout layouts[] = {
       {MODKEY | ShiftMask, KEY, tag, {.ui = 1 << TAG}},                        \
       {MODKEY | ControlMask | ShiftMask, KEY, toggletag, {.ui = 1 << TAG}},
 
+#define STACKKEYS(MOD,ACTION) \
+    { MOD, XK_j,     ACTION##stack, {.i = INC(+1) } }, \
+    { MOD, XK_k,     ACTION##stack, {.i = INC(-1) } }, \
+    { MOD, XK_s,     ACTION##stack, {.i = PREVSEL } }, \
+    { MOD, XK_q,     ACTION##stack, {.i = 0 } }, \
+    { MOD, XK_e,     ACTION##stack, {.i = 1 } }, \
+    { MOD, XK_a,     ACTION##stack, {.i = 2 } }, \
+    { MOD, XK_z,     ACTION##stack, {.i = -1 } },
+
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd)                                                             \
   {                                                                            \
@@ -97,8 +106,8 @@ static const Key keys[] = {
     {MODKEY, XK_space, spawn, {.v = dmenucmd}},
     {MODKEY | ShiftMask, XK_Return, spawn, {.v = termcmd}},
     {MODKEY, XK_b, togglebar, {0}},
-    {MODKEY, XK_j, focusstack, {.i = +1}},
-    {MODKEY, XK_k, focusstack, {.i = -1}},
+    STACKKEYS(MODKEY,                              focus)
+    STACKKEYS(MODKEY|ShiftMask,                    push)
     {MODKEY, XK_i, incnmaster, {.i = +1}},
     {MODKEY, XK_d, incnmaster, {.i = -1}},
     {MODKEY, XK_h, setmfact, {.f = -0.05}},
@@ -125,7 +134,7 @@ static const Key keys[] = {
     {MODKEY | ShiftMask, XK_x, changeunfocusopacity, {.f = -0.025}},
     TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2) TAGKEYS(XK_4, 3)
         TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5) TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7)
-            TAGKEYS(XK_9, 8){MODKEY | ShiftMask, XK_q, quit, {0}},
+            TAGKEYS(XK_9, 8){MODKEY | ShiftMask, XK_BackSpace, quit, {0}},
 };
 
 /* button definitions */
