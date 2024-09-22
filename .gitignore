@@ -3,4 +3,4 @@ dwm/dmw*
 drw
 .cache
 result
-.direnv/
+.direnv/*
