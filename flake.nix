@@ -19,6 +19,7 @@
     mkPackages = pkgs: {
       dwm = pkgs.callPackage ./dwm.nix {};
       dwmblocks = pkgs.callPackage ./dwmblocks.nix {};
+      sent = pkgs.callPackage ./sent.nix {};
     };
 
     mkShells = pkgs: {
