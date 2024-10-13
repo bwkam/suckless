@@ -13,10 +13,6 @@ stdenv.mkDerivation rec {
 
   installFlags = [ "PREFIX=$(out)" ];
 
-  postInstall = ''
-    wrapProgram "$out/bin/sent" --prefix PATH : "${farbfeld}/bin"
-  '';
-
   meta.mainProgram = "sent";
 
 }
