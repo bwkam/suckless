@@ -9,7 +9,6 @@ stdenv.mkDerivation rec {
   src = ./sent;
 
   buildInputs = [ libX11 libXft ];
-  nativeBuildInputs = [ makeWrapper ];
 
   installFlags = [ "PREFIX=$(out)" ];
 
