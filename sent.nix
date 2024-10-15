@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchurl, farbfeld, libX11, libXft, makeWrapper}:
+{ lib, stdenv, fetchurl, farbfeld, libX11, libXft, pkg-config, cairo, makeWrapper}:
 
 stdenv.mkDerivation rec {
   pname = "sent";
@@ -8,7 +8,7 @@ stdenv.mkDerivation rec {
 
   src = ./sent;
 
-  buildInputs = [ libX11 libXft ];
+  buildInputs = [ libX11 libXft pkg-config cairo ];
   nativeBuildInputs = [ makeWrapper ];
 
   installFlags = [ "PREFIX=$(out)" ];
