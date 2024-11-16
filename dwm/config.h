@@ -31,12 +31,13 @@ static const char col_gray2[] = "#444444";
 static const char col_gray3[] = "#bbbbbb";
 static const char col_gray4[] = "#eeeeee";
 static const char col_cyan[] = "#005577";
+static const char col_white[] = "#FFFFFF";
 static const char col_black[] = "#000000";
 
 static const char *colors[][3] = {
     /*               fg         bg         border   */
     [SchemeNorm] = {col_gray3, col_black, col_gray2},
-    [SchemeSel] = {col_gray4, col_cyan, col_cyan},
+    [SchemeSel] = {col_black, col_white, col_white},
 };
 
 /* tagging */
@@ -56,8 +57,17 @@ static const Rule rules[] = {
        unfocusopacity
        monitor
      */
-    {"Gimp",    NULL, NULL, 0, 1, 1.0, inactiveopacity, -1},
-    {"spkitty", NULL, NULL, 0, 1, activeopacity, inactiveopacity, -1, },
+    {"Gimp", NULL, NULL, 0, 1, 1.0, inactiveopacity, -1},
+    {
+        "spkitty",
+        NULL,
+        NULL,
+        0,
+        1,
+        activeopacity,
+        inactiveopacity,
+        -1,
+    },
     {"Firefox", NULL, NULL, 1 << 8, 0, activeopacity, inactiveopacity, -1},
 
 };
@@ -73,9 +83,7 @@ static const Layout layouts[] = {
     /* symbol     arrange function */
     {"[]=", tile}, /* first entry is default */
     {"><>", NULL}, /* no layout function means floating behavior */
-    {"[M]", monocle},
-    {"|M|", centeredmaster},
-    {">M>", centeredfloatingmaster},
+    {"[M]", monocle}, {"|M|", centeredmaster}, {">M>", centeredfloatingmaster},
 };
 
 /* key definitions */
@@ -86,14 +94,14 @@ static const Layout layouts[] = {
       {MODKEY | ShiftMask, KEY, tag, {.ui = 1 << TAG}},                        \
       {MODKEY | ControlMask | ShiftMask, KEY, toggletag, {.ui = 1 << TAG}},
 
-#define STACKKEYS(MOD,ACTION) \
-    { MOD, XK_j,     ACTION##stack, {.i = INC(+1) } }, \
-    { MOD, XK_k,     ACTION##stack, {.i = INC(-1) } }, \
-    { MOD, XK_s,     ACTION##stack, {.i = PREVSEL } }, \
-    { MOD, XK_q,     ACTION##stack, {.i = 0 } }, \
-    { MOD, XK_e,     ACTION##stack, {.i = 1 } }, \
-    { MOD, XK_a,     ACTION##stack, {.i = 2 } }, \
-    { MOD, XK_z,     ACTION##stack, {.i = -1 } },
+#define STACKKEYS(MOD, ACTION)                                                 \
+  {MOD, XK_j, ACTION##stack, {.i = INC(+1)}},                                  \
+      {MOD, XK_k, ACTION##stack, {.i = INC(-1)}},                              \
+      {MOD, XK_s, ACTION##stack, {.i = PREVSEL}},                              \
+      {MOD, XK_q, ACTION##stack, {.i = 0}},                                    \
+      {MOD, XK_e, ACTION##stack, {.i = 1}},                                    \
+      {MOD, XK_a, ACTION##stack, {.i = 2}},                                    \
+      {MOD, XK_z, ACTION##stack, {.i = -1}},
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd)                                                             \
@@ -109,22 +117,30 @@ static const char *dmenucmd[] = {
     "-nf",       col_gray3, "-sb",    col_cyan, "-sf",     col_gray4, NULL};
 static const char *termcmd[] = {"kitty", "--single-instance", NULL};
 static const char scratchpadname[] = "scratchpad";
-static const char *scratchpadcmd[] = { "kitty", "--class","spkitty", "--override","initial_window_width=720", "--override", "initial_window_height=400", "--override", "remember_window_size=no", NULL};
+static const char *scratchpadcmd[] = {"kitty",
+                                      "--class",
+                                      "spkitty",
+                                      "--override",
+                                      "initial_window_width=720",
+                                      "--override",
+                                      "initial_window_height=400",
+                                      "--override",
+                                      "remember_window_size=no",
+                                      NULL};
 
 static const Key keys[] = {
     /* modifier                     key        function        argument */
     {MODKEY, XK_space, spawn, {.v = dmenucmd}},
     {MODKEY | ShiftMask, XK_Return, spawn, {.v = termcmd}},
-    {MODKEY, XK_grave,  togglescratch, {.v = scratchpadcmd }},
+    {MODKEY, XK_grave, togglescratch, {.v = scratchpadcmd}},
     {MODKEY, XK_b, togglebar, {0}},
-    STACKKEYS(MODKEY,                              focus)
-    STACKKEYS(MODKEY|ShiftMask,                    push)
-    {MODKEY, XK_i, incnmaster, {.i = +1}},
+    STACKKEYS(MODKEY, focus) STACKKEYS(MODKEY | ShiftMask, push){
+        MODKEY, XK_i, incnmaster, {.i = +1}},
     {MODKEY, XK_d, incnmaster, {.i = -1}},
     {MODKEY, XK_h, setmfact, {.f = -0.05}},
     {MODKEY, XK_l, setmfact, {.f = +0.05}},
-    {Mod1Mask, XK_Return, zoom, {0}},
-    {MODKEY, XK_Tab, view, {0}},
+    {MODKEY, XK_Tab, zoom, {0}},
+    {MODKEY, XK_q, view, {0}},
     {MODKEY, XK_w, killclient, {0}},
     {MODKEY, XK_t, setlayout, {.v = &layouts[0]}},
     {MODKEY, XK_s, setlayout, {.v = &layouts[1]}},
